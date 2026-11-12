@@ -2,6 +2,7 @@
   "name": "remotion-cloud-render",
   "version": "1.0.0",
   "dependencies": {
+    "@react-three/fiber": "8.17.10",
     "@remotion/cli": "4.0.220",
     "@remotion/three": "4.0.220",
     "@types/three": "0.169.0",
