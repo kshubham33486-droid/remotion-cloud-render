@@ -1,29 +1,23 @@
 name: Render Remotion Video
-
 on:
   workflow_dispatch:
+    inputs:
+      scene:
+        description: 'Which scene to render? (Studio3D or Main)'
+        required: true
+        default: 'Studio3D'
 
 jobs:
   render:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
         with:
           node-version: 20
-
-      - name: Install dependencies
-        run: npm install
-
-      - name: Render MP4 video
-        run: npx remotion render src/index.ts Main out/video.mp4
-
-      - name: Upload rendered video
-        uses: actions/upload-artifact@v4
+      - run: npm install
+      - run: npx remotion render src/index.ts ${{ github.event.inputs.scene }} out/video.mp4 --gl=angle
+      - uses: actions/upload-artifact@v4
         with:
           name: rendered-video
           path: out/video.mp4
-          
