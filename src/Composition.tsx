@@ -296,5 +296,5 @@ export const MughalCourt: React.FC = () => {
     </AbsoluteFill>
   );
 };
-
+export const MyComposition = MughalCourt;
 export default MughalCourt;
