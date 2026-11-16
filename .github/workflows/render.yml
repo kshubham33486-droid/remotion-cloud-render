@@ -3,9 +3,9 @@ on:
   workflow_dispatch:
     inputs:
       scene:
-        description: 'Which scene to render? (Studio3D or Main)'
+        description: 'Which scene to render? (Main or Studio3D)'
         required: true
-        default: 'Studio3D'
+        default: 'Main'
 
 jobs:
   render:
@@ -16,9 +16,8 @@ jobs:
         with:
           node-version: 20
       - run: npm install --legacy-peer-deps
-      - run: npx remotion render src/index.ts ${{ github.event.inputs.scene }} out/video.mp4 --gl=angle
+      - run: npx remotion render src/index.ts ${{ github.event.inputs.scene }} out/video.mp4
       - uses: actions/upload-artifact@v4
         with:
           name: rendered-video
           path: out/video.mp4
-          
